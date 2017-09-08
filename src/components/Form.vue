@@ -106,7 +106,7 @@ import putFiles from '@/services/s3storage';
   }
 </script>
 
-<style lang="scss">
+<style>
   .form {
       margin-top: 50px;
   }

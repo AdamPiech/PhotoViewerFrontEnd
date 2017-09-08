@@ -5,6 +5,10 @@ var s3 = new AWS.S3(config);
 var bucket = 'photoviewerstore';
 
 var putFiles = function(fileList) {
+    
+    alert(config.accessKeyId);
+    alert(config.region);
+
     for (file in fileList) {
         putFile(file, file.name);
     }
@@ -18,7 +22,7 @@ var putFile = function(file) {
         ACL: 'public-read'
     }, function(err, data) {
         if (err) {
-            return alert('There was an error uploading your photo: ', err.message);
+            alert('There was an error uploading your photo: ', err.message);
         }
     });
 }
