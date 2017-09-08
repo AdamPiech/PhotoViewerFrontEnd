@@ -1,0 +1,10 @@
+{"expiration": {"day":1},
+  "conditions": [ 
+    {"bucket": "photoviewerstore"}, 
+    ["starts-with", "$key", "/"],
+    {"acl": "private"},
+    {"success_action_redirect": "http://localhost:8080"},
+    ["starts-with", "$Content-Type", ""],
+    ["content-length-range", 0, 1048576]
+  ]
+}
