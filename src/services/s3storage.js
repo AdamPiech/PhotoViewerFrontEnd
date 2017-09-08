@@ -2,6 +2,11 @@ var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 
 var bucket = 'photoviewerstore';
+var s3Bucket = new AWS.S3({ 
+    params: {
+        Bucket: bucket
+    } 
+})
 
 var putFiles = function(formData) {
 
@@ -20,10 +25,9 @@ var putFiles = function(formData) {
 }
 
 var putFile = function(file) {
-    this.s3.upload({
+    s3Bucket.putObject({
         Key: file.name,
-        Body: file,
-        ACL: 'public-read'
+        Body: file
     }, function(err, data) {
         if (err) {
             alert(err.message);
