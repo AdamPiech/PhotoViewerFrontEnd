@@ -34,8 +34,30 @@ var putFile = function(file) {
             alert('There was an error uploading your photo: ', err.message);
         }
     });
+    listFiles();
 }
 
+var listFiles = function() {
+    alert('listowanie plików');
+    s3.listObjects({
+        Bucket: bucket
+    }, function(err, data){
+    var bucketContents = data.Contents;
+    for (var i = 0; i < bucketContents.length; i++) {
+        var urlParams = {
+            Bucket: bucket, 
+            Key: bucketContents[i].Key
+        };
+        s3.getSignedUrl('getObject', urlParams, function(err, url) {
+            alert('the url of the image is', url);
+            if (err) {
+                alert(err.message);
+                alert('There was an error list your photos: ', err.message);
+            }
+        });
+    }
+});
+}
 
 exports.putFiles = putFiles;
 exports.putFile = putFile;
