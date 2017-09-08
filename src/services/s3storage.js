@@ -1,6 +1,6 @@
 var AWS = require('aws-sdk');
 var config = new AWS.Config();
-var s3 = new AWS.S3(s3.config);
+var s3 = new AWS.S3(config);
 
 var bucket = 'photoviewerstore';
 
