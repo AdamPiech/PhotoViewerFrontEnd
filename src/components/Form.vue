@@ -39,7 +39,7 @@
 <script>
 // import { upload } from '@/scripts/file-upload';
 // import { upload } from '@/scripts/file-upload.fake';
-import putFiles from '@/services/s3storage';
+import * as storage from '@/services/s3storage';
 
   const STATUS_INITIAL = 0, STATUS_SAVING = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
 
@@ -73,10 +73,10 @@ import putFiles from '@/services/s3storage';
         this.uploadedFiles = [];
         this.uploadError = null;
       },
-      // save(formData) {
-        save(fileList) {
+      save(formData) {
+        // save(fileList) {
           this.currentStatus = STATUS_SAVING;
-          s3storage.putFiles(fileList);
+          storage.putFiles(formData);
           this.currentStatus = STATUS_SUCCESS;
         // upload(formData)
         //   .then(x => {
@@ -89,15 +89,15 @@ import putFiles from '@/services/s3storage';
         //   });
       },
       filesChange(fieldName, fileList) {
-        // const formData = new FormData();
+        const formData = new FormData();
         if (!fileList.length) return;
-        // Array
-        //   .from(Array(fileList.length).keys())
-        //   .map(x => {
-        //     formData.append(fieldName, fileList[x], fileList[x].name);
-        //   });
-        // this.save(formData);
-        this.save(fileList);
+        Array
+          .from(Array(fileList.length).keys())
+          .map(x => {
+            formData.append(fieldName, fileList[x], fileList[x].name);
+          });
+        this.save(formData);
+        // this.save(fileList);
       }
     },
     mounted() {

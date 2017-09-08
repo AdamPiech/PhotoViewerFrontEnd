@@ -4,14 +4,19 @@ var s3 = new AWS.S3(config);
 
 var bucket = 'photoviewerstore';
 
-var putFiles = function(fileList) {
-    
-    alert(config.accessKeyId);
-    alert(config.region);
+var putFiles = function(formData) {
 
-    for (file in fileList) {
-        putFile(file, file.name);
+    // alert(config.accessKeyId);
+    // alert(config.region);
+
+    const photos = formData.getAll('photos');
+
+    for (var i in photos) {
+        alert(photos[i]);
+        alert(photos[i].name);
+        putFile(photos[i]);
     }
+
 }
 
 var putFile = function(file) {
