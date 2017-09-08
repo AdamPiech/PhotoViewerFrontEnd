@@ -5,8 +5,9 @@ var bucket = 'photoviewerstore';
 
 var putFiles = function(formData) {
 
-    alert(config.accessKeyId);
-    alert(config.region);
+    alert(bucket);
+    alert(AWS.config.accessKeyId);
+    alert(AWS.config.region);
 
     const photos = formData.getAll('photos');
 
@@ -19,8 +20,7 @@ var putFiles = function(formData) {
 }
 
 var putFile = function(file) {
-    var photoKey = albumPhotosKey + fileName;
-    s3.upload({
+    this.s3.upload({
         Key: file.name,
         Body: file,
         ACL: 'public-read'

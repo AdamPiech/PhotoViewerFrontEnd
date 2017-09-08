@@ -74,7 +74,6 @@ import * as storage from '@/services/s3storage';
         this.uploadError = null;
       },
       save(formData) {
-        // save(fileList) {
           this.currentStatus = STATUS_SAVING;
           storage.putFiles(formData);
           this.currentStatus = STATUS_SUCCESS;
@@ -97,7 +96,6 @@ import * as storage from '@/services/s3storage';
             formData.append(fieldName, fileList[x], fileList[x].name);
           });
         this.save(formData);
-        // this.save(fileList);
       }
     },
     mounted() {
